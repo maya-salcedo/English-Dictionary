@@ -6,7 +6,11 @@ data = json.load(open('data.json'))
 def definition(word):
     while True:
         if word in data:
-            return(data[word])
+            return(str(data[word]))
+        elif word.title() in data:
+            return data[word.title()]
+        elif word.upper() in data:
+            return data[word.upper()]
         else:
             try:
                 alternative_word = difflib.get_close_matches(word, data, n=1)
@@ -17,5 +21,6 @@ def definition(word):
                 break
 
 while True:
-        word_to_check = input('Enter a word:').strip().lower()
-        print(definition(word_to_check))
+        word_to_check = input('Enter a word:').lower()
+        output = definition(word_to_check)
+        print(output)
